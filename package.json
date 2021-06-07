@@ -1,12 +1,12 @@
 {
-  "name": "reactwarriors-movie-app",
+  "name": "movie-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-scripts": "^1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -26,4 +26,5 @@
       "last 1 safari version"
     ]
   }
+
 }
