@@ -11,9 +11,9 @@ export default class MovieList extends Component {
     };
   }
 
-  getMovies = filters => {
+  getMovies = (filters, page) => {
     const {filters: {sort_by}} = filters
-    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
+    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}&page=${page}`;
     fetch(link)
         .then(response => {
           return response.json();
@@ -26,7 +26,7 @@ export default class MovieList extends Component {
   }
 
   componentDidMount() {
-    this.getMovies(this.props)
+    this.getMovies(this.props, this.props.page);
     // const {filters: {sort_by}} = this.props
     // const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
     // fetch(link)
@@ -40,9 +40,9 @@ export default class MovieList extends Component {
     //   });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.filters.sort_by !== this.props.filters.sort_by) {this.getMovies(nextProps)
-    }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.filters.sort_by !== this.props.filters.sort_by) {this.getMovies(nextProps)
+  //   }
     //   const {filters: {sort_by}} = nextProps
     //   const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
     //   fetch(link)
@@ -55,6 +55,12 @@ export default class MovieList extends Component {
     //         });
     //       });
     // }
+  // }
+  componentDidUpdate(prevProps) {
+      if (this.props.filters.sort_by !== prevProps.filters.sort_by){
+        this.props.onChangePage(1)
+        this.getMovies(this.props, 1)}
+      if (this.props.page !== prevProps.page){this.getMovies(this.props, this.props.page)}
   }
 
   render() {
